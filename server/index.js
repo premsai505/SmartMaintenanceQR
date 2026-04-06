@@ -303,7 +303,7 @@ const distPath = path.join(__dirname, '../dist');
 if (fs.existsSync(distPath)) {
   app.use(express.static(distPath));
   
-  app.get('*', (req, res) => {
+  app.get(/.*/, (req, res) => {
     // Avoid sending index.html for undefined API routes
     if (req.originalUrl.startsWith('/api/') || req.originalUrl.startsWith('/uploads/')) {
         return res.status(404).json({ error: 'Endpoint not found' });
