@@ -23,11 +23,11 @@ export default function AdminDashboard() {
     try {
       setError('');
       const [st, tk, sf, rl, qr] = await Promise.all([
-        axios.get('http://localhost:3000/api/admin/stats'),
-        axios.get('http://localhost:3000/api/tickets'),
-        axios.get('http://localhost:3000/api/admin/staff'),
-        axios.get('http://localhost:3000/api/admin/rules'),
-        axios.get('http://localhost:3000/api/admin/qrs')
+        axios.get('/api/admin/stats'),
+        axios.get('/api/tickets'),
+        axios.get('/api/admin/staff'),
+        axios.get('/api/admin/rules'),
+        axios.get('/api/admin/qrs')
       ]);
       setStats(st.data);
       setTickets(tk.data);
@@ -47,7 +47,7 @@ export default function AdminDashboard() {
   const handleCreateUser = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3000/api/admin/users', newUser);
+      await axios.post('/api/admin/users', newUser);
       alert('User created successfully');
       setNewUser({ email: '', password: '', role: 'student', phone: '' });
       fetchData();
@@ -59,7 +59,7 @@ export default function AdminDashboard() {
   const handleCreateRule = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3000/api/admin/rules', newRule);
+      await axios.post('/api/admin/rules', newRule);
       alert('Rule applied!');
       setNewRule({ hostel_name: '', staff_id: '' });
       fetchData();

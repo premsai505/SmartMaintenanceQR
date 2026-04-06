@@ -15,7 +15,7 @@ export function AuthProvider({ children }) {
       localStorage.setItem('token', token);
       
       // Fetch user profile on load to confirm token validity
-      axios.get('http://localhost:3000/api/me')
+      axios.get('/api/me')
         .then(res => {
           setUser(res.data);
           setLoading(false);
@@ -33,13 +33,13 @@ export function AuthProvider({ children }) {
   }, [token]);
 
   const login = async (email, password) => {
-    const res = await axios.post('http://localhost:3000/api/login', { email, password });
+    const res = await axios.post('/api/login', { email, password });
     setToken(res.data.token);
     setUser(res.data.user);
   };
 
   const signup = async (email, password, phone, role = 'student') => {
-    const res = await axios.post('http://localhost:3000/api/signup', { email, password, phone, role });
+    const res = await axios.post('/api/signup', { email, password, phone, role });
     setToken(res.data.token);
     setUser(res.data.user);
   };

@@ -17,7 +17,7 @@ export default function TrackTicket() {
 
   useEffect(() => {
     if (user?.role === 'student') {
-      axios.get('http://localhost:3000/api/tickets')
+      axios.get('/api/tickets')
         .then(res => setHistory(res.data))
         .catch(err => console.error("Failed to load history", err));
     }
@@ -37,7 +37,7 @@ export default function TrackTicket() {
     setTicket(null);
 
     try {
-      const response = await axios.get(`http://localhost:3000/api/tickets/${idToTrack.toUpperCase()}`);
+      const response = await axios.get(`/api/tickets/${idToTrack.toUpperCase()}`);
       setTicket(response.data);
     } catch (err) {
       if (err.response && err.response.status === 404) {
@@ -111,7 +111,7 @@ export default function TrackTicket() {
               <div style={{ marginTop: '1rem' }}>
                 <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem', marginBottom: '0.5rem' }}>Attached Image</p>
                 <img 
-                  src={`http://localhost:3000${ticket.image_url}`} 
+                  src={ticket.image_url} 
                   alt="Issue" 
                   style={{ width: '100%', borderRadius: '8px', maxHeight: '200px', objectFit: 'cover' }} 
                 />

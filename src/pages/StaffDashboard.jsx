@@ -8,7 +8,7 @@ export default function StaffDashboard() {
 
   const fetchTickets = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/api/tickets');
+      const res = await axios.get('/api/tickets');
       setTickets(res.data);
     } catch (err) {
       console.error(err);
@@ -32,7 +32,7 @@ export default function StaffDashboard() {
         return;
       }
       
-      await axios.put(`http://localhost:3000/api/tickets/${ticketId}/status`, formData);
+      await axios.put(`/api/tickets/${ticketId}/status`, formData);
       fetchTickets();
     } catch(err) {
       alert('Failed to update status');
@@ -66,7 +66,7 @@ export default function StaffDashboard() {
               
               {t.image_url && (
                 <div style={{ marginBottom: '1rem', borderRadius: '8px', overflow: 'hidden', height: '150px' }}>
-                  <img src={`http://localhost:3000${t.image_url}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="Issue" />
+                  <img src={t.image_url} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="Issue" />
                 </div>
               )}
 

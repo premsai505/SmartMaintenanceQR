@@ -44,7 +44,7 @@ export default function GenerateQR() {
       // Save to Database
       try {
         const token = localStorage.getItem('token'); // assuming token is in localStorage, or we get it from auth context
-        await axios.post('http://localhost:3000/api/admin/qrs', {
+        await axios.post('/api/admin/qrs', {
           hostel_name: hostel,
           floor_name: floor,
           qr_url: qrImageUrl

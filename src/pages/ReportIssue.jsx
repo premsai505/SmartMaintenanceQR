@@ -54,7 +54,7 @@ export default function ReportIssue() {
     formData.append('image', image);
 
     try {
-      const response = await axios.post('http://localhost:3000/api/tickets', formData, {
+      const response = await axios.post('/api/tickets', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       setTicket(response.data);
