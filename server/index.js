@@ -110,10 +110,11 @@ const upload = multer({ storage });
 
 // ------------- AUTH ROUTES -------------
 app.post('/api/login', (req, res) => {
-  const { email, password } = req.body;
+  const email = req.body.email?.trim().toLowerCase();
+  const password = req.body.password;
   db.get(`SELECT * FROM users WHERE email = ? AND password = ?`, [email, password], (err, user) => {
     if (err) return res.status(500).json({ error: err.message });
-    if (!user) return res.status(401).json({ error: 'Invalid email or password' });
+    if (!user) return res.status(401).json({ error: 'Invalid email id or password' });
     
     const token = jwt.sign({ id: user.id, email: user.email, role: user.role }, JWT_SECRET, { expiresIn: '7d' });
     res.json({ token, user: { id: user.id, email: user.email, role: user.role } });
@@ -121,7 +122,8 @@ app.post('/api/login', (req, res) => {
 });
 
 app.post('/api/signup', (req, res) => {
-  const { email, password, phone, role } = req.body;
+  const email = req.body.email?.trim().toLowerCase();
+  const { password, phone, role } = req.body;
   const newId = uuidv4();
   // Allow explicit role signup (student/staff/admin) for demo purposes. 
   // In a real app, admin/staff roles should only be minted by admins.
@@ -148,7 +150,8 @@ app.get('/api/me', authMiddleware, (req, res) => {
 // Create any user (Admin making other Admins, Staff, or Students)
 app.post('/api/admin/users', authMiddleware, (req, res) => {
   if (req.user.role !== 'admin') return res.status(403).json({ error: 'Forbidden' });
-  const { email, password, role, phone } = req.body;
+  const email = req.body.email?.trim().toLowerCase();
+  const { password, role, phone } = req.body;
   const newId = uuidv4();
   
   db.run(`INSERT INTO users (id, email, password, role, phone) VALUES (?, ?, ?, ?, ?)`, 
