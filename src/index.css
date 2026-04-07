@@ -212,3 +212,32 @@ select.input-field option {
   color: var(--success);
   border: 1px solid rgba(16, 185, 129, 0.2);
 }
+
+/* Responsive Utilities */
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.responsive-padding {
+  padding: 2rem;
+}
+
+.responsive-margin {
+  margin: 2rem auto;
+}
+
+@media (max-width: 640px) {
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .responsive-padding {
+    padding: 1.25rem;
+  }
+
+  .responsive-margin {
+    margin: 1rem auto;
+  }
+}

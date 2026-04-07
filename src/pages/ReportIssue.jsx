@@ -90,14 +90,14 @@ export default function ReportIssue() {
   }
 
   return (
-    <div className="animate-fade-in" style={{ maxWidth: '600px', margin: '2rem auto' }}>
-      <div className="glass-panel" style={{ padding: '2rem' }}>
+    <div className="animate-fade-in responsive-margin container" style={{ maxWidth: '600px' }}>
+      <div className="glass-panel responsive-padding">
         <h2 style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <Camera /> Report an Issue
         </h2>
         
         <form onSubmit={handleSubmit}>
-          <div style={{ display: 'flex', gap: '1rem' }}>
+          <div className="form-row">
             <div className="input-group" style={{ flex: 1 }}>
               <label className="input-label">Hostel Name</label>
               <input 
